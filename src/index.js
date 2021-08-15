@@ -32,11 +32,13 @@ module.exports = function toReadable(number) {
         if (units === 0) {
             finalResultTens = getRightTens(tens);
             finalResultUnits = '';
+            finalResult = finalResultTens;
         }
     }
 
     if (tens === 1) {
         finalResultTens = getValueFromTenToNineteen(units);
+        finalResult = finalResultTens;
     }
 
     if (tens === 0) {
@@ -51,21 +53,22 @@ module.exports = function toReadable(number) {
     }
 
     if (hundreds === '' && tens === '') {
-        finalResult = getRightNumber(units);
+        finalResultUnits = getRightNumber(units);
+        finalResult = finalResultUnits;
     }
 
     if (finalResultTens === '' && finalResultUnits === '') {
         finalResult = finalResultHundreds;
     }
 
-    if (finalResultUnits === '') {
+    if (finalResultUnits === '' && finalResultHundreds !== '') {
         finalResult = finalResultHundreds + ' ' + finalResultTens;
     }
 
     if (finalResultHundreds === '' && finalResultTens === '') {
         finalResult = finalResultUnits;
     }
-   
+
     if (finalResultHundreds !== '' && finalResultTens !== '' && finalResultUnits !== '') {
         finalResult = finalResultHundreds + ' ' + finalResultTens + ' ' + finalResultUnits;
     }
